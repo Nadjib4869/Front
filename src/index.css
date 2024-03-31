@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  @apply
+  m-0
+  p-0
+}
+.cards{
+  @apply
+    bg-white
+    shadow-md
+    w-[350px]
+    rounded-md
+    overflow-hidden
+    mt-8
+    relative
+    transition
+    duration-500
+    z-0
+}
+.cards1{
+  @apply
+    bg-white
+    shadow-md
+    w-[250px]
+    rounded-md
+    overflow-hidden
+    mt-8
+    relative
+    transition
+    duration-500
+    z-0
+}
+.cards2{
+  @apply
+    bg-white
+    shadow-md
+    w-fit
+    rounded-md
+    overflow-hidden
+    mt-8
+    relative
+    transition
+    duration-500
+    z-0
+}
+.cards:hover {
+  @apply
+  shadow-xl
+}
+.cards1:hover {
+  @apply
+  shadow-xl
+}
+.cards2:hover {
+  @apply
+  shadow-xl
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+
+.home-container{
+  height: 65vh;
+  /*background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000C2A 65.69%), linear-gradient(110deg, #00051F 38.47%, rgba(0, 0, 0, 0.00) 56.13%), rgba(217, 217, 217, 0.00);
+  */opacity: 8;
+}
+.home-container .bh {
+  background-image: url("./Assets/images/background.png");
+  position: absolute;
+  inset: 0;
+  height: 65vh;
+}
+.home-container .home-banner-container .hero {
+  background-color: linear-gradient(105deg, #000 4.65%, rgba(0, 0, 0, 0.00) 91.52%), url("./Assets/images/hero.png"), lightgray 50% / cover no-repeat;
+  right: 0;
+  top: 0;
+  height: 65vh;
+  overflow: hidden;
+}
+.categories_box{
+  background-color: #E9F2FF;
+}
+.categories_box > .ellipse{
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  animation-delay: 0.3s;
+  
+}
+
+.categories > .bn:hover {
+  animation-name: bn-an;
+  animation-timing-function: ease;
+}
+.categories > .bn {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-name: bn-an;
+  animation-timing-function: ease;
+  background-color: #E9F2FF;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+
