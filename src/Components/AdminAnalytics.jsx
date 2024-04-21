@@ -34,9 +34,9 @@ export default function AdminAnalytics() {
     setStyle3('font-bold text-cyan-900 underline');
   }
   return (
-    <div className="ps-96 text-xl pt-32 h-screen">
-      <div className="flex items-center justify-between ps-4 w-full  pb-4">
-        <h1 className="text-2xl font-semibold">Event Created :</h1>
+    <div className="lg:max-[1096px]:ps-[208px] min-[1096px]:max-[1195px]:ps-64 min-[1195px]:ps-96 pe-2 text-xl pt-16 h-screen">
+      <div className="flex items-center justify-between ps-4 pe-4 w-full pb-4">
+        <h1 className="text-2xl font-semibold">Events Created :</h1>
         <div>
           <span className="text-lg font-semibold">Per : </span>
         <span className={` w-16 h-8 text-sm cursor-pointer ${style1} `} onClick={()=>DAY()}>DAY </span>
@@ -46,7 +46,7 @@ export default function AdminAnalytics() {
         <span className={` w-16 h-8 text-sm cursor-pointer ${style3} `} onClick={()=>YEAR()}> YEAR</span>
         </div>
       </div>
-      <div className="w-[900px]">
+      <div className="w-full">
       {day && <LineChartDay/>}
       {Month && <LineChartMonth/>}
       {Year && <LineChartYear/>}

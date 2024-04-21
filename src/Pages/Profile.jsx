@@ -70,9 +70,9 @@ export default function Profile() {
         <div className='wrapper overflow-x-hidden bg-[#E1E1E1]'>
             <div className='h-screen'>
                 <Navbar />
-                <span className='flex justify-center h-rest gap-x-6'>
+                <span className='flex max-[1105px]:flex-col max-[1105px]:items-center w-full justify-center h-rest gap-x-6'>
                     <div className='mt-8'>
-                        <div className='h-80 w-[440px] rounded-lg p-4 px-6 border border-[#bdbdbd] bg-white'>
+                        <div className='h-80 w-[440px] max-sm:w-[300px] rounded-lg p-4 px-6 border border-[#bdbdbd] bg-white'>
                             <div className='flex flex-col items-center justify-center mb-6'>
                                 <img src={`http://localhost:8000/assets/${userInfo.image}`} alt="" className='h-[130px] w-[140px] rounded-full' />
                                 <h2 className='mb-5 text-[#414141]'>{userInfo?.username}</h2>
@@ -87,12 +87,12 @@ export default function Profile() {
                                 <p>{userInfo?.phoneNumber}</p>
                             </div>
                         </div>
-                        { userInfo?.description &&  (<div className='overflow-auto wrapper h-[170px] w-[440px] bg-white border border-[#bdbdbd] rounded-lg px-4 py-2 mt-4'>
+                        { userInfo?.description &&  (<div className='overflow-auto wrapper h-[170px] w-[440px] max-sm:w-[300px] bg-white border border-[#bdbdbd] rounded-lg px-4 py-2 mt-4'>
                             <h2 className='mb-1 font-semibold'>Description</h2>
                             <p className='w-full overflow-y-auto break-words outline-none' placeholder='Your Description...'>{userInfo?.description}</p>
                         </div>)}
                     </div>
-                    <section className='flex-col w-1/2 mt-8'>
+                    <section className='w-1/2 mt-8 max-[1105px]:w-4/5 max-md:w-full'>
                         <div className='h-[60px] rounded-lg p-2 flex items-center justify-evenly border border-[#bdbdbd] bg-white'>
                             <a href="" className={`${showLiked ? 'pt-[17px] pb-3 border-b-4 border-[#0047ff]' : ''}`} onClick={handleLikedClick}>Liked</a>
                             <a href="" className={` ${showEvents ? 'pt-[17px] pb-3 border-b-4 border-[#0047ff]' : ''}`} onClick={handleEventsClick}>Events</a>

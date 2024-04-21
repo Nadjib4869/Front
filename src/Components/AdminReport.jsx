@@ -49,11 +49,17 @@ export default function AdminReport({ data }) {
   };
 
   return (
-    <div className="ps-96">
-      <form className="ps-8 flex pt-32" onSubmit={handleSubmit}>
-        <div className="rounded-2xl shadow-md bg-white w-[400px] flex gap-2 justify-center items-center ps-2">
+    <div className="lg:max-[1096px]:ps-[208px] min-[1096px]:max-[1195px]:ps-64 min-[1195px]:ps-96">
+      <form className="sm:ps-8 max-sm:ps-2 max-sm:pe-2 flex max-sm:flex-col lg:pt-10 gap-y-2" onSubmit={handleSubmit}>
+        <div className="rounded-2xl shadow-md bg-white w-[400px] max-sm:w-full flex gap-2 justify-center items-center ps-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <g opacity="0.5">
+            <circle cx="5.78721" cy="5.78721" r="5.09339" stroke="black" stroke-width="1.38765"/>
+            <path d="M13.653 14.7359C14.0594 15.1424 14.7184 15.1423 15.1248 14.7359C15.5312 14.3294 15.5312 13.6705 15.1247 13.2641L13.653 14.7359ZM15.1247 13.2641L10.4442 8.58378L8.97243 10.0556L13.653 14.7359L15.1247 13.2641Z" fill="black"/>
+            </g>
+          </svg>
           <input
-            className="focus:outline-none focus:border-none border-none text-md p-2"
+            className="focus:outline-none focus:border-none border-none text-md p-2 w-[350px] max-[434px]:w-[280px]"
             type="text"
             placeholder="Search by event name, username, keywords"
             value={searchInput}
@@ -63,7 +69,7 @@ export default function AdminReport({ data }) {
         </div>
 
         <input
-          className="focus:outline-none focus:border-none border-none w-[150px] ms-8 rounded-2xl shadow-md text-md p-2"
+          className="focus:outline-none focus:border-none border-none w-[150px] sm:ms-8 rounded-2xl shadow-md text-md py-2 px-4"
           type="text"
           placeholder="Location"
           value={locationInput}
@@ -71,7 +77,7 @@ export default function AdminReport({ data }) {
           onKeyPress={handleKeyPress}
         />
       </form>
-      <div className="ps-16 pe-8 pb-2 pt-8 flex gap-[700px]">
+      <div className="sm:ps-16 max-sm:ps-2 sm:pe-16 max-sm:pe-2 pb-2 pt-8 flex justify-between">
         <p className="text-gray-800 font-semibold text-lg">
           There is <span className="text-blue-700 font-bold">{CardsData.length}</span> events found
         </p>

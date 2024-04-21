@@ -112,18 +112,20 @@ export default function Preference() {
   };
 
   return (
-    <div className={`transition top-6 duration-700 absolute h-max w-max ${animationClass} bg-white rounded-md flex flex-col gap-6 ps-5 pe-5 pt-10 pb-10`}>
-      <h1 className='text-xl font-semibold text-left '> Choose Topic That You Are Interested In.</h1>
-      {clicked && <h1 className='text-sm font-semibold text-red-800'>{`you are choosing ${myArray.length} item(s)`}</h1>}
-      <div className='h-max w-max grid grid-cols-3 gap-4'>
-        {imageDATA.map((image, index) => (
-          <div className={`w-64 h-64 cursor-pointer flex flex-col hover:scale-[1.01] ${index === 0 ? a0 : index === 1 ? a1 : index === 2 ? a2 : index === 3 ? a3 : index === 4 ? a4 : a5}`} onClick={() => handleClick(index)} key={index}>
-            <img className='' src={image.img} alt='image' />
-            <h1 className={`text-md text-center font-bold  ${index === 0 ? h0 : index === 1 ? h1 : index === 2 ? h2 : index === 3 ? h3 : index === 4 ? h4 : h5}`}>{image.text}</h1>
-          </div>
-        ))}
+    <div className="h-screen overflow-auto flex justify-center items-center bg-cover bg-[url('./Assets/preferences.jpg')]">
+      <div className={`transition top-6 duration-700 absolute h-fit w-fit ${animationClass} bg-white rounded-md max-[826px]:rounded-3xl flex flex-col gap-6 py-10 px-32 max-lg:px-10 max-xl:px-16`}>
+        <h1 className='text-xl font-semibold text-left '> Choose Topic That You Are Interested In.</h1>
+        {clicked && <h1 className='text-sm font-semibold text-red-800'>{`you are choosing ${myArray.length} item(s)`}</h1>}
+        <div className='h-max w-max grid grid-cols-3 gap-4 max-[826px]:grid-cols-2'>
+          {imageDATA.map((image, index) => (
+            <div className={`w-64 h-64 cursor-pointer max-[560px]:w-40 max-[560px]:h-40 max-[826px]:h-[170px] max-[826px]:w-[170px] flex flex-col hover:scale-[1.01] ${index === 0 ? a0 : index === 1 ? a1 : index === 2 ? a2 : index === 3 ? a3 : index === 4 ? a4 : a5}`} onClick={() => handleClick(index)} key={index}>
+              <img className='' src={image.img} alt='image' />
+              <h1 className={`text-md text-center font-bold  ${index === 0 ? h0 : index === 1 ? h1 : index === 2 ? h2 : index === 3 ? h3 : index === 4 ? h4 : h5}`}>{image.text}</h1>
+            </div>
+          ))}
+        </div>
+        <h1 className='text-xl font-semibold text-right  hover:underline cursor-pointer'>continue </h1>
       </div>
-      <h1 className='text-xl font-semibold text-right  hover:underline cursor-pointer'>continue </h1>
     </div>
   );
 }

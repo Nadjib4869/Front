@@ -142,7 +142,7 @@ export default function LineChartDay() {
   }, []); // Empty dependency array ensures the effect runs only once, similar to componentDidMount
 
   return (
-    <div className="ps-16">
+    <div className="ps-16 max-[1300px]:ps-4">
       <canvas ref={chartRef} className="w-[275px] h-[100px] rounded-lg bg-white" />
     </div>
   );

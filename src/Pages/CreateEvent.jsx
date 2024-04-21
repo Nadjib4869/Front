@@ -145,7 +145,7 @@ const CreateEvent = () => {
   return (
     <div className='bg-[#E1E1E1] pb-8 w-full wrapper' >
       <Navbar />
-      <main className='px-10 py-4 mx-32 my-4 bg-white rounded-lg min-h-rest'>
+      <main className='px-10 py-4 mx-32 my-20 max-md:mx-0 max-lg:mx-6 bg-white rounded-lg min-h-rest'>
         <h1 className='flex justify-center text-3xl text-blue-950 font-semibold'>Create New Event</h1>
         <form className='flex flex-col mt-4 space-y-3' onSubmit={handleSubmit}>
           <input 
@@ -269,7 +269,9 @@ const CreateEvent = () => {
             </div>
             {errorMsg && <p className='ml-4 text-red-600'>{errorMsg}</p>}
           </section>
-          <button type='submit' className='w-32 p-1 mt-4 text-white transition duration-300 ease-in-out bg-blue-500 rounded-lg hover:scale-[1.01]'>Save Changes</button>
+          <div className='flex justify-end'>
+            <button type='submit' className='w-32 p-1 mt-4 text-white transition duration-300 ease-in-out bg-blue-500 rounded-lg hover:scale-[1.01]'>Save Changes</button>
+          </div>
         </form>
       </main>
     </div>

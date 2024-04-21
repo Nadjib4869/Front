@@ -15,6 +15,7 @@ import EditEvent from './Pages/EditEvent';
 import EditProfile from "./Pages/EditProfile";
 import UserProfile from "./Pages/UserProfile";
 import { QueryClient, QueryClientProvider } from 'react-query';
+import Preference from "./Components/preference";
 
 const queryClient = new QueryClient();
 
@@ -51,17 +52,9 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <ProfileImageProvider>
-          <Routes location={location}>
-            {localStorage.getItem('username') === "admin" ? (
-              <>
+          <Routes >
+            <>
                 <Route path="/Admin" element={<Admin />} />
-                <Route path="/EventPage/:id" element={<EventPage />} />
-                <Route path="/Profile/:id" element={<Profile />} />
-                <Route path="/SignUp" element={<SignUp />} />
-                <Route path="/Login" element={<Login />} />
-              </>
-            ) : (
-              <>
                 <Route path="/" element={<FirstPage />} />
                 <Route path="/Explore" element={<SignUp />} />
                 <Route path="/Contact" element={<SignUp />} />
@@ -70,6 +63,7 @@ function App() {
                 <Route path="/TermOfUse" element={<SignUp />} />
                 <Route path="/SignUp" element={<SignUp />} />
                 <Route path="/Login" element={<Login />} />
+                <Route path="/Preference" element={<Preference />} />
                 <Route path="/Profile/:id" element={<Profile />} />
                 <Route path="/EditEvent/:id" element={<EditEvent />} />
                 <Route path="/CreateEvent" element={<CreateEvent />} />
@@ -78,7 +72,6 @@ function App() {
                 <Route path="/EditProfile/:id" element={<EditProfile />} />
                 <Route path="/*" element={<Notfound />} />
               </>
-            )}
           </Routes>
         </ProfileImageProvider>
       </QueryClientProvider>

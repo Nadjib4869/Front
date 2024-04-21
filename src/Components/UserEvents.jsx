@@ -7,7 +7,7 @@ import image from '../Assets/images/hero.png'
 
 const CreateNewEvent = () => {
   return (
-    <div className=" flex flex-col justify-center items-center">
+    <div className=" flex flex-col justify-center items-center w-[280px] h-[250px]">
       <Link to="/createEvent">
         <img
         src={AddBtn}
@@ -112,10 +112,10 @@ const deleteEvent = async (eventId, token) => {
     }
     return (
         <>
-            {userEvent.map((card) => (
-                <div className='flex flex-col items-center ' key={card._id}>
+          {userEvent.map((card) => (
+              <div className='flex flex-col w-[280px]' key={card._id}>
                     <div className="cards1" onClick={() => handleCardClick(card._id)} >
-                    <img className='w-[250px] h-[220px]' src={`http://localhost:8000/assets/${card.image}`} alt="image" />
+                    <img className='w-[280px] h-[220px]' src={`http://localhost:8000/assets/${card.image}`} alt="image" />
                 <div className="absolute top-0 left-0 bg-white pt-0.5 pb-0.5 pe-2 ps-2"><p className="text-base font-medium">{card.price}</p></div>
                 <div className="flex justify-between items-center pt-2 pb-2 ps-1 pe-2">
                 <div className="basis-1/6 font-medium text-md text-center">
@@ -139,12 +139,12 @@ const deleteEvent = async (eventId, token) => {
                 </div>
                     </div>
                     {isUser && 
-                    <div className='flex items-center justify-between w-full'>
+                    <div className='space-x-6'>
                       <button className='bg-red-600 rounded-xl font-semibold text-lg text-white pt-2 pb-2 w-32 pe-4 ps-4 mt-4 hover:scale-[1.01] hover:shadow-xl' onClick={() => handleDelete(card._id)}>Cancel </button>
                       <button className='bg-blue-600 rounded-xl font-semibold text-lg text-white pt-2 pb-2 w-32 pe-4 ps-4 mt-4 hover:scale-[1.01] hover:shadow-xl' onClick={() => handleEdit(card._id)}>Edit</button>
                       </div> }
-                </div>
-            ))}
+              </div>
+            ))}  
         </>
     );
 };
@@ -153,17 +153,17 @@ const UserEvents = ({ isUser, data }) => {
     const token = localStorage.getItem('token');
     
     return (
-      <section className="flex flex-col py-4 gap-y-8">
-        <div className='w-[880px]'>
+      <section className="flex flex-col py-4">
+        <div className='w-full'>
           <h3 className="text-lg font-semibold">Upcoming</h3>
-          <div className="grid grid-cols-3 gap-1 justify-items-center mt-4 mb-4">
+          <div className="grid mb-4 gap-x-32 grid-cols-3 max-[1469px]:grid-cols-2 max-[1469px]:gap-x-16 max-[1105px]:grid-cols-3 max-[996px]:grid-cols-2 max-md:gap-0 max-[588px]:grid-cols-1 max-md:ml-4 max-[588px]:ml-10 max-[354px]:ml-0">
             <ShowingEventCard data={data} token={token} isUser={isUser} />
             {isUser && <CreateNewEvent />}
           </div>
         </div>
-        <div className='w-[880px]'>
+        <div className='w-full'>
           <h3 className="text-lg font-semibold">Passed</h3>
-          <div className="grid grid-cols-3 gap-1 justify-items-center mt-4 mb-4">
+          <div className="grid mb-4 gap-x-32 grid-cols-3 max-[1469px]:grid-cols-2 max-[1469px]:gap-x-16 max-[1105px]:grid-cols-3 max-[996px]:grid-cols-2 max-md:gap-0 max-[588px]:grid-cols-1 max-md:ml-4 max-[588px]:ml-10 max-[354px]:ml-0">
             <ShowingEventCard data={data} token={token}  />
           </div>
         </div>

@@ -42,7 +42,9 @@ export default function Login() {
           if (response.ok) {
             const data = await response.json();
             if (data){
-            const { userId, username } = data.user;
+            //const { userId, username } = data.user;
+            const userId = data.user.userId;
+            const username = data.user.username;
             localStorage.setItem('userId', userId);
             localStorage.setItem('username' , username);
             localStorage.setItem('token', data.token);
@@ -62,13 +64,13 @@ export default function Login() {
       };
     
   return (
-    <div className='relative overflow-hidden w-screen h-screen flex justify-center items-center' >
-        <img  className='w-screen h-fit' src={image} alt="image" />
-        <div className={`transition duration-700 absolute top-32 h-fit w-fit bg-white rounded-lg ${animationClass}`}>
-         <h1 className='text-3xl font-bold text-center m-16'>Login</h1>
+    <div className="relative overflow-hidden w-screen h-screen flex justify-center items-center bg-[url('./Assets/imageLogin.png')]" >
+        <div className={`transition duration-700 absolute top-32 h-fit w-fit max-[400px]:w-full bg-white min-[400px]:rounded-lg ${animationClass}`}>
+          <h1 className='text-3xl font-bold text-center m-16'>Login</h1>
           <div className='flex flex-col gap-4 items-center justify-center m-16 '>
             <form className='flex flex-col gap-8' onSubmit={handleSubmit}>
             <input
+                className='p-2 outline-none'
                 type="email"
                 placeholder="Email"
                 name="email"
@@ -77,6 +79,7 @@ export default function Login() {
                 required
             />
             <input
+                className='p-2 outline-none'
                 type="password"
                 placeholder="Password"
                 name="password"

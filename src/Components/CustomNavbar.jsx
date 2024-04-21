@@ -54,7 +54,7 @@ const CustomNavbar = () => {
                 <img src="" alt="Logo" />
               </Link>
             </div>
-            <ul className='flex gap-20'>
+            <ul className='flex gap-20 max-sm:hidden'>
             {[
             ['Explore', '/'],
             ['About', ''],
@@ -74,20 +74,23 @@ const CustomNavbar = () => {
                   {notificationToogleDropdown && 
                     <div className='wrapper text-[#393939] absolute z-20 overflow-y-auto top-14 right-24 rounded-lg bg-[#E1E1E1] w-[230px] max-h-[229px] flex flex-col items-center'>
                       <p className='left-0 w-full pb-1 pl-3 border-b border-slate-100'>Notifications</p>
-                      {notifications && notifications.map((notification) => (
-                        <span
-                          key={notification.id}
-                          onClick={() => handleNotificationClick(notification.id)}
-                          className='flex flex-row items-center justify-center w-full border rounded-lg cursor-pointer border-slate-100'
-                        >
-                          {notification.message && <img src={Active} alt="" />}
-                          <img className='w-10 h-10 mr-2' src={UserIcon} alt="" />
-                          <div className='flex flex-col'>
-                            <p>{notification.message}</p>
-                            <p>{notification.date}</p>
-                          </div>
-                        </span>
-                      ))}
+                      {notifications && notifications.length > 0 ? (notifications.map((notification) => (
+                          <span
+                            key={notification.id}
+                            onClick={() => handleNotificationClick(notification.id)}
+                            className='flex flex-row items-center justify-center w-full border rounded-lg cursor-pointer border-slate-100'
+                          >
+                            {notification.message && <img src={Active} alt="" />}
+                            <img className='w-10 h-10 mr-2' src={UserIcon} alt="" />
+                            <div className='flex flex-col'>
+                              <p>{notification.message}</p>
+                              <p>{notification.date}</p>
+                            </div>
+                          </span>
+                        ))
+                      ) : (
+                        <p>No notifications</p>
+                      )}
                     </div>
                   }
                 </li>

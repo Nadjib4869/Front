@@ -87,7 +87,7 @@ const EditProfile = () => {
       className='wrapper w-full h-screen overflow-y-auto bg-[#E1E1E1]'
     >
       <Navbar />
-      <main className='py-2 mx-32 my-4 space-y-4 bg-white rounded-lg px-[200px] min-h-adjust'>
+      <main className='py-4 mx-32 my-20 max-xl:mx-0 space-y-4 bg-white rounded-lg px-[200px] max-lg:px-[100px] max-sm:px-10 min-h-adjust'>
         <h1 className='flex justify-center text-3xl text-blue-950 font-semibold'>
           Edit Profile
         </h1>

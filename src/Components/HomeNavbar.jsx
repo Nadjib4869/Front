@@ -39,11 +39,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className='absolute z-40 flex justify-between w-full py-4 px-14'>
+    <nav className='absolute z-40 flex justify-between w-full py-4 px-14 max-sm:px-6'>
       <div className='text-white'>
         <img src="" alt="Logo" />
       </div>
-      <span className='space-x-20 text-slate-300'>
+      <span className='max-md:hidden md:space-x-20 md:text-slate-300'>
         {navigationItems.map(([title, url], index) => (
           <Link key={index} to={url} className='hover:border-b-2 hover:text-white'>
             {title}
@@ -68,7 +68,7 @@ const Navbar = () => {
         </div>
       )}
       {token && toggleDropdown && (
-        <div className='absolute top-2 right-28 rounded-lg bg-white w-[230px] h-[250px] flex flex-col gap-4 items-center'>
+        <div className='absolute top-2 right-28 max-sm:right-20 rounded-lg bg-white w-[230px] h-[250px] flex flex-col gap-4 items-center'>
           {isLoading ? (
             <p>Loading...</p>
           ) : isError ? (
