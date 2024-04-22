@@ -50,13 +50,15 @@ const CustomNavbar = () => {
   return (
     <nav className='flex justify-between items-center p-9 h-[74px] bg-white border border-[#9f9f9f]'>
             <div className=''>
-              <Link to="/">
+              <a href={'/'}>
                 <img src="" alt="Logo" />
-              </Link>
+              </a>
             </div>
             <ul className='flex gap-20 max-sm:hidden'>
+            <Link to={'/'}>
+              <li>Explore</li>
+            </Link>
             {[
-            ['Explore', '/'],
             ['About', ''],
             ['Contact', ''],
             ].map(([title,url], index)=> (

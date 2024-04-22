@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link} from 'react-router-dom';
 import { useQuery  ,useQueryClient   } from 'react-query';
 import search from '../Assets/images/search.svg';
@@ -45,6 +45,14 @@ export default function Categories() {
   const [data, setCardsData] = useState([]);
   const  id  = localStorage.getItem('userId');
   const { data: userInfo, isLoading: userLoading, isError: userError } = useQuery(['userData', id], fetchUserData);
+  
+  //! Scroll to explore
+  const scrollRef = useRef(null);
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
   
   async function fetchUserData() {
     try {
@@ -129,20 +137,22 @@ console.log(userInfo)
   }
   if (isLoading) {
   return (
-    <div className="relative h-screen w-screen">
+    <div className="relative w-screen h-screen">
       <Loading />
     </div>
   );
 }
 
+  
+
   return (
   <>
-    <div className='categories_box h-full space-y-11'>
-    <div className='relative flex justify-center items-center'>
+    <div className='h-full categories_box space-y-11'>
+    <div className='relative flex items-center justify-center'>
       <div className='relative w-2/5 max-sm:w-3/5 mt-7'>
         <img className='absolute top-2.5 left-2 h-5' src={search} alt="" />
         <input
-          className='pl-10 md:pl-14 px-4 py-2 w-full transition-colors duration-1000 ease-in-out outline-none text-slate-900 placeholder-slate-700 placeholder-sm bg-slate-300 rounded-3xl hover:shadow-lg'
+          className='w-full px-4 py-2 pl-10 transition-colors duration-1000 ease-in-out outline-none md:pl-14 text-slate-900 placeholder-slate-700 placeholder-sm bg-slate-300 rounded-3xl hover:shadow-lg'
           type="text"
           placeholder='Enter Event Name'
           value={searchInput}
@@ -163,7 +173,7 @@ console.log(userInfo)
         ))}
       </span>
     </div>
-    <h1 className="pt-8 pb-8 text-3xl font-bold text-center text-indigo-950" >Upcoming Events</h1>
+    <h1 ref={scrollRef} className="pt-8 pb-8 text-3xl font-bold text-center text-indigo-950" >Upcoming Events</h1>
     <div className="relative">
         { data  ? (
           <div className="grid grid-cols-3 max-[1070px]:grid-cols-2 max-[711px]:grid-cols-1 justify-items-center mt-16 mb-16" >
@@ -171,8 +181,8 @@ console.log(userInfo)
               <div className="cards" key={card._id}>
                           <img  src={`http://localhost:8000/assets/${card.image}`} alt="" />
                           <div className="absolute top-0 left-0 bg-white pt-0.5 pb-0.5 pe-2 ps-2"><p className="text-base font-medium">{card.price} </p></div>
-                          <div onClick={()=>{ if (!token) {setclick(true)} else {navigate(`/eventpage/${card._id}`)}}} className="flex cursor-pointer  justify-between items-center pt-4 pb-4 ps-1 pe-2">
-                              <div className="basis-1/6 font-medium text-xl text-center">{card.date}</div>
+                          <div onClick={()=>{ if (!token) {setclick(true)} else {navigate(`/eventpage/${card._id}`)}}} className="flex items-center justify-between pt-4 pb-4 cursor-pointer ps-1 pe-2">
+                              <div className="text-xl font-medium text-center basis-1/6">{card.date}</div>
                               <div className="basis-3/6 ps-1">
                                   <h3   className="text-xl font-medium ">{card.title}</h3>
                                   <h4 >{card.organizer?.username}</h4>
@@ -196,19 +206,19 @@ console.log(userInfo)
             ))}
           </div>
         ) : (
-          <div className="flex flex-col justify-center items-center h-fit ">
+          <div className="flex flex-col items-center justify-center h-fit ">
             <img className="w-60 h-60 " src={notFound} />
-            <h1 className="text-5xl font-bold text-gray-800 pt-10 pb-10">Oooops,</h1>
+            <h1 className="pt-10 pb-10 text-5xl font-bold text-gray-800">Oooops,</h1>
             <p className="text-lg text-gray-600">There is no result for your search.</p>
-            <p className="text-lg text-gray-600 space-x-2 pb-10">Come on, try again !</p>
+            <p className="pb-10 space-x-2 text-lg text-gray-600">Come on, try again !</p>
           </div>
         )}
 
         <div className={`${ click  ? 'fixed inset-0 z-50 flex backdrop-blur-md justify-center items-center w-screen h-screen' : 'hidden' }`}>
             <div className=" bg-gray-200 shadow-xl rounded-lg w-[500px] h-[230px] max-[520px]:w-[400px] max-[415px]:w-[300px]">
-            <h1 className="flex justify-end pr-2 cursor-pointer text-xl" onClick={()=>{setclick(false)}}>×</h1>
-             <div className="flex flex-col m-4 justify-center items-center">
-             <h1 className="text-2xl font-bold text-center pt-4 pb-4"> You need an account.</h1>
+            <h1 className="flex justify-end pr-2 text-xl cursor-pointer" onClick={()=>{setclick(false)}}>×</h1>
+             <div className="flex flex-col items-center justify-center m-4">
+             <h1 className="pt-4 pb-4 text-2xl font-bold text-center"> You need an account.</h1>
                 <Link className=" font-semibold bg-blue-500  pb-1 shadow-md rounded-md mb-2 text-center text-white text-lg w-32 hover:scale-[1.05] " to="/Login" >login</Link>
                 <Link className=" font-semibold bg-gold2 pb-1 shadow-md rounded-md text-center text-white text-lg w-32 hover:scale-[1.05] " to="/SignUp" > Signup</Link>
              </div>
