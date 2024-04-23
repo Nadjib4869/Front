@@ -6,6 +6,7 @@ import Doorbell from '../Assets/images/Doorbell.svg'
 import Active from '../Assets/images/Active.svg'
 import { useProfileImage } from './ProfileImageContext';
 import { useQuery, useQueryClient } from 'react-query';
+import logo from "../Assets/Logo.png";
 
 const CustomNavbar = () => {
   const Navigate = useNavigate();
@@ -48,15 +49,19 @@ const CustomNavbar = () => {
   };
   const {profileImage} = useProfileImage();
   return (
-    <nav className='flex justify-between items-center p-9 h-[74px] bg-white border border-[#9f9f9f]'>
+    <nav className='flex justify-between items-center max-[734px]:px-3 p-9 h-[74px] bg-white border border-[#9f9f9f]'>
             <div className=''>
               <a href={'/'}>
-                <img src="" alt="Logo" />
+                <img src={logo} alt="Logo" className='h-10 w-18' />
               </a>
             </div>
-            <ul className='flex gap-20 max-sm:hidden'>
+            <ul className='flex gap-20 max-[670px]:hidden'>
             <Link to={'/'}>
-              <li>Explore</li>
+              <li>
+                <a className='border-black hover:border-b-2'>
+                  Explore
+                </a>
+              </li>
             </Link>
             {[
             ['About', ''],
@@ -65,7 +70,7 @@ const CustomNavbar = () => {
             <li key={index}><a href={url} className='border-black hover:border-b-2'>{title}</a></li>
             ))}
             </ul>
-            <ul className="flex gap-24">
+            <ul className="flex gap-24 max-[500px]:gap-16">
                 <li className='flex gap-12 mt-2'>
                     <img 
                     src={Doorbell} 

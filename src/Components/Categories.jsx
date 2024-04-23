@@ -46,8 +46,8 @@ export default function Categories() {
   const  id  = localStorage.getItem('userId');
   const { data: userInfo, isLoading: userLoading, isError: userError } = useQuery(['userData', id], fetchUserData);
   
-  //! Scroll to explore
-  const scrollRef = useRef(null);
+  //* Scroll to explore
+  const scrollRef = useRef();
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -173,7 +173,7 @@ console.log(userInfo)
         ))}
       </span>
     </div>
-    <h1 ref={scrollRef} className="pt-8 pb-8 text-3xl font-bold text-center text-indigo-950" >Upcoming Events</h1>
+    <h1 ref={scrollRef} id="section" className="pt-8 pb-8 text-3xl font-bold text-center text-indigo-950" >Upcoming Events</h1>
     <div className="relative">
         { data  ? (
           <div className="grid grid-cols-3 max-[1070px]:grid-cols-2 max-[711px]:grid-cols-1 justify-items-center mt-16 mb-16" >

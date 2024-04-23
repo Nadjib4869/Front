@@ -56,7 +56,6 @@ function App() {
             <>
                 <Route path="/Admin" element={<Admin />} />
                 <Route path="/" element={<FirstPage />} />
-                <Route path="/Explore" element={<SignUp />} />
                 <Route path="/Contact" element={<SignUp />} />
                 <Route path="/About" element={<SignUp />} />
                 <Route path="/FAQ" element={<SignUp />} />
