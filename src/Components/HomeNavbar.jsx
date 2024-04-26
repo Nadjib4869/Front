@@ -9,7 +9,7 @@ const Navbar = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const Navigate = useNavigate();
   const navigationItems = [
-    ['About', ''],
+    ['About', '/About'],
     ['Contact', ''],
   ];
   const { data: userData, isLoading, isError } = useQuery(['userData'], fetchUserData);

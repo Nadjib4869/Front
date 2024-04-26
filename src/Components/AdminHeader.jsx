@@ -7,7 +7,7 @@ export default function AdminHeader() {
         <img src={logo} alt="Logo" className='h-10 w-18' />
         <div className="flex gap-14 max-[432px]:gap-4 max-[350px]:gap-2">
           <Link className="hover:underline" to="/">Explore</Link>
-          <Link className="hover:underline" to="/">About</Link>
+          <Link className="hover:underline" to="/About">About</Link>
           <Link className="hover:underline" to="/">Contact</Link>
         </div>
     </div>

@@ -16,6 +16,7 @@ import EditProfile from "./Pages/EditProfile";
 import UserProfile from "./Pages/UserProfile";
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Preference from "./Components/preference";
+import About from "./Pages/About";
 
 const queryClient = new QueryClient();
 
@@ -57,7 +58,7 @@ function App() {
                 <Route path="/Admin" element={<Admin />} />
                 <Route path="/" element={<FirstPage />} />
                 <Route path="/Contact" element={<SignUp />} />
-                <Route path="/About" element={<SignUp />} />
+                <Route path="/About" element={<About />} />
                 <Route path="/FAQ" element={<SignUp />} />
                 <Route path="/TermOfUse" element={<SignUp />} />
                 <Route path="/SignUp" element={<SignUp />} />

@@ -9,12 +9,14 @@ import { useQuery, useQueryClient } from 'react-query';
 import logo from "../Assets/Logo.png";
 
 const CustomNavbar = () => {
+  const token = localStorage.getItem('token'); 
   const Navigate = useNavigate();
   const queryClient = useQueryClient();
   const [toogleDropdown, setToogleDropdown] = useState(false);
   const [notificationToogleDropdown, setNotificationToogleDropdown] = useState(false);
   const { data: userData, isLoading, isError } = useQuery(['userData'], fetchUserData);
   console.log(userData?.notification);
+  
   async function fetchUserData() {
     const token = localStorage.getItem('token');
     if (token){
@@ -64,12 +66,13 @@ const CustomNavbar = () => {
               </li>
             </Link>
             {[
-            ['About', ''],
+            ['About', '/About'],
             ['Contact', ''],
             ].map(([title,url], index)=> (
             <li key={index}><a href={url} className='border-black hover:border-b-2'>{title}</a></li>
             ))}
             </ul>
+            {token && userData ? (
             <ul className="flex gap-24 max-[500px]:gap-16">
                 <li className='flex gap-12 mt-2'>
                     <img 
@@ -152,6 +155,16 @@ const CustomNavbar = () => {
                   }
                 </li>
             </ul>
+            ):(
+              <div className='space-x-3 max-[765px]:space-x-1'>
+                <Link className='px-6 py-1 pb-2 bg-yellow-500 rounded-3xl hover:bg-yellow-600 max-[752px]:px-4 max-[340px]:px-2' to="/signup">
+                  Sign Up
+                </Link>
+                <Link className='py-1 pb-2 bg-blue-500 text-white rounded-3xl px-7 hover:bg-blue-700 max-[752px]:px-4 max-[340px]:px-2' to="/login">
+                  Log In
+                </Link>
+              </div>
+            )}
     </nav>
   )
 }
