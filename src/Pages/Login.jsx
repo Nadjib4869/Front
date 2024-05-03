@@ -41,7 +41,7 @@ export default function Login() {
     
           if (response.ok) {
             const data = await response.json();
-            if (data){
+            if (data && data.user){
             //const { userId, username } = data.user;
             const userId = data.user.userId;
             const username = data.user.username;
@@ -66,8 +66,8 @@ export default function Login() {
   return (
     <div className="relative overflow-hidden w-screen h-screen flex justify-center items-center bg-[url('./Assets/imageLogin.png')]" >
         <div className={`transition duration-700 absolute top-32 h-fit w-fit max-[400px]:w-full bg-white min-[400px]:rounded-lg ${animationClass}`}>
-          <h1 className='text-3xl font-bold text-center m-16'>Login</h1>
-          <div className='flex flex-col gap-4 items-center justify-center m-16 '>
+          <h1 className='m-16 text-3xl font-bold text-center'>Login</h1>
+          <div className='flex flex-col items-center justify-center gap-4 m-16 '>
             <form className='flex flex-col gap-8' onSubmit={handleSubmit}>
             <input
                 className='p-2 outline-none'
@@ -89,8 +89,8 @@ export default function Login() {
             />
             <button className='h-8 bg-gradient-to-r from-sky-500 to-indigo-500 hover:scale-[1.05] text-md rounded-full text-white mb-4' type="submit" >Continue</button>
     </form>
-           <h2 className='text-md  text-gray-500'>Do not you have an account?</h2> 
-            <h2 className='hover:underline cursor-pointer' onClick={()=>{navigate('/SignUp')}}>Sign Up</h2>
+           <h2 className='text-gray-500 text-md'>Do not you have an account?</h2> 
+            <h2 className='cursor-pointer hover:underline' onClick={()=>{navigate('/SignUp')}}>Sign Up</h2>
             </div>
         </div>
        

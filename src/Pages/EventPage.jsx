@@ -30,7 +30,7 @@ const EventPage = () => {
   const { data: event, isLoading ,  isError } = useQuery(['event', id], () => fetchEvent(id));
 
   console.log('Event:', event);
-  if (isLoading) return <div className="relative h-screen w-screen"><Loading/></div>
+  if (isLoading) return <div className="relative w-screen h-screen"><Loading/></div>
   if (isError) {
     return <Notfound />;
   }
@@ -142,7 +142,7 @@ const ReportForm = async (selectedReason) => {
                         <h1 className='text-6xl font-bold text-white'>{event.title}</h1>
                     </div>
                     <img className='sm:rounded-lg w-[700px] max-sm:w-full object-cover h-[380px]' src={`http://localhost:8000/assets/${event.image}`} alt="" />
-                    <img className='absolute right-0 cursor-pointer bottom-0' src={Like} alt="" />
+                    <img className='absolute bottom-0 right-0 cursor-pointer' src={Like} alt="" />
                     <div className='absolute flex flex-row justify-between p-2 space-x-[600px] max-[820px]:space-x-[580px] max-[790px]:space-x-[550px] max-md:space-x-[520px] max-[730px]:space-x-[480px] max-[690px]:space-x-[450px] max-[670px]:space-x-[490px] max-sm:space-x-[240px]'>
                         <div className='flex flex-row'>
                             <img className='' src={EmptyLike} alt="" />
@@ -156,10 +156,10 @@ const ReportForm = async (selectedReason) => {
                 </span>
                 
             </div>
-            <div className='flex flex-row justify-between max-md:flex-col p-4 px-16 max-md:gap-y-7'>
+            <div className='flex flex-row justify-between p-4 px-16 max-md:flex-col max-md:gap-y-7'>
                 <div className='w-full max-md:order-2'>
                     <div className='w-[500px] flex flex-col space-y-2 max-md:w-full'>
-                        <div className='flex items-center justify-start ps-5 bg-white rounded-lg h-16'>
+                        <div className='flex items-center justify-start h-16 bg-white rounded-lg ps-5'>
                             <p>{event.date}</p>
                         </div>
                         <div className='flex items-center justify-start bg-white rounded-lg '>
@@ -167,7 +167,7 @@ const ReportForm = async (selectedReason) => {
                             {event.description}
                             </p>
                         </div>
-                        <div className='flex items-center justify-between px-2 bg-white rounded-lg h-16'>
+                        <div className='flex items-center justify-between h-16 px-2 bg-white rounded-lg'>
                             <div className='flex flex-row items-center space-x-2'>
                                 <img className='rounded-full h-9 w-9 ' src={`http://localhost:8000/assets/${event.organizer.image}`} alt="" />
                             { redirectToProfile(event.organizer._id) ? (
@@ -195,7 +195,7 @@ const ReportForm = async (selectedReason) => {
                     <div className='bg-gray-400 h-[50px] w-full rounded-t-lg flex justify-center items-center'>
                         Comments                    
                     </div>
-                    <div className='mb-10 Container w-full'>
+                    <div className='w-full mb-10 Container'>
                         <div className='bg-white border-[#BDBDBD] border-2 w-full rounded-b-lg'>
                             <form  onSubmit={handleFeedbackSubmit}>
                                 <textarea name='feedback' className='ps-8 pt-4 pe-8 pb-4 w-full h-[60px] outline-none' placeholder='Type your feedback...' onKeyPress={handleKeyPress} />
@@ -225,7 +225,7 @@ const ReportForm = async (selectedReason) => {
     {showReportPopup && (
         <div className='fixed top-0 left-0 z-30 flex items-center justify-center w-full h-full max-lg:w-'>
             <form  onSubmit={handleSubmit} className="flex flex-col justify-center bg-white rounded-3xl py-2 h-[600px] w-[900px]">
-                <h2 className='flex items-center font-bold text-2xl mb-4 justify-center'>Report Event</h2>
+                <h2 className='flex items-center justify-center mb-4 text-2xl font-bold'>Report Event</h2>
                 <span className='p-4 ml-16 space-y-2 max-[500px]:ml-4'>
                     <h2 className='font-semibold'>Reasons of Report :</h2>
                     <div className='ml-2 space-y-3'>

@@ -67,7 +67,7 @@ const CustomNavbar = () => {
             </Link>
             {[
             ['About', '/About'],
-            ['Contact', ''],
+            ['Contact', '/Contact'],
             ].map(([title,url], index)=> (
             <li key={index}><a href={url} className='border-black hover:border-b-2'>{title}</a></li>
             ))}

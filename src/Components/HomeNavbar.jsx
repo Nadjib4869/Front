@@ -10,7 +10,7 @@ const Navbar = () => {
   const Navigate = useNavigate();
   const navigationItems = [
     ['About', '/About'],
-    ['Contact', ''],
+    ['Contact', '/Contact'],
   ];
   const { data: userData, isLoading, isError } = useQuery(['userData'], fetchUserData);
   

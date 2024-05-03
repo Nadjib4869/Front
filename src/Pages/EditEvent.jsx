@@ -144,8 +144,8 @@ const EditEvent = () => {
   return (
     <div className='bg-[#E1E1E1] pb-8 w-full wrapper' >
       <Navbar />
-      <main className='px-10 py-4 mx-32 my-20 max-md:mx-0 max-lg:mx-6 bg-white rounded-lg min-h-rest'>
-        <h1 className='flex justify-center text-3xl text-blue-950 font-semibold'>Edit Your Event</h1>
+      <main className='px-10 py-4 mx-32 my-20 bg-white rounded-lg max-md:mx-0 max-lg:mx-6 min-h-rest'>
+        <h1 className='flex justify-center text-3xl font-semibold text-blue-950'>Edit Your Event</h1>
         <form className='flex flex-col mt-4 space-y-3' onSubmit={handleSubmit}>
           <input 
           type="text" 
@@ -232,7 +232,7 @@ const EditEvent = () => {
             <option value="" disabled hidden>Select a Category</option>
             <option value="Business">Business</option>
             <option value="Cultural">Cultural</option>
-            <option value="Cultural">Cultural</option>
+            <option value="Cultural">Art</option>
             <option value="Politics">Politics</option>
             <option value="Sports">Sports</option>
             <option value="Educational">Educational</option>

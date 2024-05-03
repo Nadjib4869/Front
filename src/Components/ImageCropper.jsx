@@ -1,4 +1,4 @@
-import  { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ReactCrop, { centerCrop, convertToPercentCrop, convertToPixelCrop,makeAspectCrop } from 'react-image-crop';
 import EditProfileIcon from '../Assets/images/Pencil.svg';
 import setCanvasPreview from '../setCanvasPreview';
@@ -54,8 +54,9 @@ const ImageCropper = ({userIcon, updateAvatar,modalOpen,setModalOpen, closeModal
   
   const  {setProfileImage}  = useProfileImage();
   const handleImageChange = () => {
+    //const imageFile = userIcon;
+    // Perform any necessary image processing
     setProfileImage(userIcon);
-    
     console.log(userIcon);
   };
   console.log(userIcon);
@@ -96,7 +97,7 @@ const ImageCropper = ({userIcon, updateAvatar,modalOpen,setModalOpen, closeModal
                     aspect={ASPECT_RATIO}
                     minWidth={MIN_DIMENSION}
                 >
-                    <img onChange={handleImageChange} ref={imgRef} src={ImgSrc} onLoad={onImageLoad} alt="Upload" style={{maxHeight: "30vh"}} />
+                    <img ref={imgRef} src={ImgSrc} onLoad={onImageLoad} alt="Upload" style={{maxHeight: "30vh"}} />
                 </ReactCrop>
                 <button className='p-1.5 mt-2 rounded-lg bg-slate-400'
                 onClick={(e) => {

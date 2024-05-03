@@ -17,6 +17,9 @@ import UserProfile from "./Pages/UserProfile";
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Preference from "./Components/preference";
 import About from "./Pages/About";
+import Contact from "./Pages/Contact";
+import Faq from "./Pages/Faq";
+import Terms from "./Pages/Terms";
 
 const queryClient = new QueryClient();
 
@@ -57,10 +60,10 @@ function App() {
             <>
                 <Route path="/Admin" element={<Admin />} />
                 <Route path="/" element={<FirstPage />} />
-                <Route path="/Contact" element={<SignUp />} />
+                <Route path="/Contact" element={<Contact />} />
                 <Route path="/About" element={<About />} />
-                <Route path="/FAQ" element={<SignUp />} />
-                <Route path="/TermOfUse" element={<SignUp />} />
+                <Route path="/FAQ" element={<Faq />} />
+                <Route path="/TermOfUse" element={<Terms />} />
                 <Route path="/SignUp" element={<SignUp />} />
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Preference" element={<Preference />} />

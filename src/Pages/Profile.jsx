@@ -17,17 +17,16 @@ export default function Profile() {
     const [showFollowers, setShowFollowers] = useState(false);
     const [showFollowing, setShowFollowing] = useState(false);
 
-    function fetchUserData() {
-        return fetch(`http://localhost:8000/users/${id}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user data');
-                }
-                return response.json();
-            })
-            .catch(error => {
-                throw new Error(error.message);
-            });
+    async function fetchUserData() {
+        try {
+            const response = await fetch(`http://localhost:8000/users/${id}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch user data');
+            }
+            return await response.json();
+        } catch (error) {
+            throw new Error(error.message);
+        }
     }
 
     const handleLikedClick = (e) => {
@@ -62,7 +61,7 @@ export default function Profile() {
         setShowFollowers(false);
     };
 
-    if (userLoading) return <div className="relative h-screen w-screen"><Loading/></div>
+    if (userLoading) return <div className="relative w-screen h-screen"><Loading/></div>
     if (userError) return <Notfound/>
 
 
@@ -74,7 +73,7 @@ export default function Profile() {
                     <div className='mt-8'>
                         <div className='h-80 w-[440px] max-sm:w-[300px] rounded-lg p-4 px-6 border border-[#bdbdbd] bg-white'>
                             <div className='flex flex-col items-center justify-center mb-6'>
-                                <img src={`http://localhost:8000/assets/${userInfo.image}`} alt="" className='h-[130px] w-[140px] rounded-full' />
+                                <img src={`http://localhost:8000/assets/${userInfo.image}`} alt="" className='h-[140px] w-[140px] rounded-full' />
                                 <h2 className='mb-5 text-[#414141]'>{userInfo?.username}</h2>
                             </div>
                             <hr className='border border-[#00000080]' />

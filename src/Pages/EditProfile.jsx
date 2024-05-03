@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../Components/CustomNavbar';
-import UserIcon from '../Assets/images/userIcon.svg';
 import ImageCropper from '../Components/ImageCropper';
 import { useProfileImage } from '../Components/ProfileImageContext';
 import axios from 'axios';
+import { useQuery, useQueryClient } from 'react-query';
 
 const EditProfile = () => {
+  const token = localStorage.getItem('token'); 
+  const { data: userData, isLoading, isError } = useQuery(['userData'], fetchUserData);
   const [charCount, setCharCount] = useState(0);
   const [username, setUsername] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null);
   const profileImage = useProfileImage();
   const navigate = useNavigate();
   console.log(profileImage);
@@ -54,6 +55,26 @@ const EditProfile = () => {
     }
   };
 
+  async function fetchUserData() {
+    const token = localStorage.getItem('token');
+    if (token){
+      try {
+      const response = await fetch('http://localhost:8000/user', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch user data');
+      }
+      return response.json();
+    } catch (error) {
+      throw new Error(error.message);
+    }}
+    
+  }
+  
   const handlePhoneChange = (e) => {
     setPhoneNumber(e.target.value);
   };
@@ -70,12 +91,12 @@ const EditProfile = () => {
     setUsername(e.target.value);
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = () => {
     setImage(profileImage);
   };
 
   const [modalOpen, setModalOpen] = useState(true);
-  const [userIcon, setUserIcon] = useState(UserIcon);
+  const [userIcon, setUserIcon] = useState(`http://localhost:8000/assets/${userData.image}`);
 
   const updateAvatar = (imgSrc) => {
     setUserIcon(imgSrc);
@@ -88,19 +109,18 @@ const EditProfile = () => {
     >
       <Navbar />
       <main className='py-4 mx-32 my-20 max-xl:mx-0 space-y-4 bg-white rounded-lg px-[200px] max-lg:px-[100px] max-sm:px-10 min-h-adjust'>
-        <h1 className='flex justify-center text-3xl text-blue-950 font-semibold'>
+        <h1 className='flex justify-center text-3xl font-semibold text-blue-950'>
           Edit Profile
         </h1>
-        <ImageCropper
-          userIcon={image} // Pass the image state as userIcon prop
-          updateAvatar={updateAvatar}
-          modalOpen={modalOpen}
-          setModalOpen={setModalOpen}
-          onChange={handleImageChange}
-          name='image'
-          closeModal={() => setModalOpen(false)}
-        />
-
+          <ImageCropper
+            userIcon={userIcon} // Pass the image state as userIcon prop
+            updateAvatar={updateAvatar}
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
+            onChange={handleImageChange}
+            name='image'
+            closeModal={() => setModalOpen(false)}
+          />
         <div className='flex flex-col'>
           <p className='ml-4'>Username</p>
           <input
@@ -156,7 +176,7 @@ const EditProfile = () => {
         <div className='flex justify-end'>
           <button
             type='submit'
-            className='w-32 p-1 mt-4 text-white transition duration-300 ease-in-out  bg-blue-500 rounded-lg hover:scale-[1.01]'
+            className='w-32 p-1 mt-4 text-white transition duration-300 ease-in-out bg-blue-500 rounded-lg hover:scale-[1.01]'
           >
             Save
           </button>

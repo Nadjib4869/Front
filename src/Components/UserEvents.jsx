@@ -117,14 +117,14 @@ const deleteEvent = async (eventId, token) => {
                     <div className="cards1" onClick={() => handleCardClick(card._id)} >
                     <img className='w-[280px] h-[220px]' src={`http://localhost:8000/assets/${card.image}`} alt="image" />
                 <div className="absolute top-0 left-0 bg-white pt-0.5 pb-0.5 pe-2 ps-2"><p className="text-base font-medium">{card.price}</p></div>
-                <div className="flex justify-between items-center pt-2 pb-2 ps-1 pe-2">
-                <div className="basis-1/6 font-medium text-md text-center">
+                <div className="flex items-center justify-between pt-2 pb-2 ps-1 pe-2">
+                <div className="font-medium text-center basis-1/6 text-md">
                   <div>{new Date(card.date).getDate()}</div>
                   <div>{new Date(card.date).toLocaleString('default', { month: 'short' })}</div>
                   <div>{new Date(card.date).getFullYear()}</div>
                 </div>
                     <div className="basis-3/6 ps-1">
-                        <h3 className="text-md font-medium text-center">{card.title}</h3>
+                        <h3 className="font-medium text-center text-md">{card.title}</h3>
                         <h4 >{data?.username}</h4>
                     </div>
                     <div className="basis-2/6"> <span className="font-medium ps-4">{data?.followers?.length} </span>Followers</div>

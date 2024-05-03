@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery ,useMutation } from 'react-query';
+import { useQuery ,useMutation, useQueryClient } from 'react-query';
 import Navbar from '../Components/CustomNavbar';
 import LikedEvents from '../Components/LikedEvents';
 import Events from '../Components/UserEvents';
@@ -18,7 +18,7 @@ export default function UserProfile() {
     const [showFollowers, setShowFollowers] = useState(false);
     const [showFollowing, setShowFollowing] = useState(false);
 
-    function fetchUserData() {
+    async function fetchUserData() {
         return fetch(`http://localhost:8000/users/${id}`)
             .then(response => {
                 if (!response.ok) {
@@ -42,7 +42,8 @@ export default function UserProfile() {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getToken()}`,
     },
-  }));
+  }),
+);
 
   const unfollowUserMutation = useMutation((id) => fetch(`http://localhost:8000/unfollowuser/${id}`, {
     method: 'PUT',
@@ -50,27 +51,31 @@ export default function UserProfile() {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getToken()}`,
     },
-  }));
+  }),
+);
 
   const isUserFollowed = (userId) => {
-    return owner && owner.follows.includes(userId);
+    console.log(owner)
+    console.log(owner.follows)
+    return owner && owner.follows && owner.follows.includes(userId);
+    
   };
+  
+  
+  
   console.log(isUserFollowed(id)) 
-  const onToggleFollow = (id, isFollowed) => {
-    let mutationPromise;
+  const onToggleFollow = async (userId, isFollowed) => {
+    try {
+        const mutationPromise = isFollowed
+            ? unfollowUserMutation.mutateAsync(userId)
+            : followUserMutation.mutateAsync(userId);
 
-    if (isFollowed) {
-        mutationPromise = unfollowUserMutation.mutate(id); // Pass id to mutate
-    } else {
-        mutationPromise = followUserMutation.mutate(id); // Pass id to mutate
-    }
-
-    mutationPromise.then(() => {
+        await mutationPromise;
         console.log("Mutation successful");
-    }).catch(error => {
+    } catch (error) {
         console.error('Error:', error);
         // Handle error
-    });
+    }
 };
 
 
@@ -107,16 +112,16 @@ export default function UserProfile() {
         setShowFollowers(false);
     };
 
-    if (userLoading) return <div className="relative h-screen w-screen"><Loading/></div>
+    if (userLoading) return <div className="relative w-screen h-screen"><Loading/></div>
     if (userError) return <Notfound/>
 
     return (
         <div className='wrapper overflow-x-hidden bg-[#E1E1E1]'>
             <div className='h-screen'>
                 <Navbar />
-                <span className='flex justify-center h-rest gap-x-6'>
+                <span className='flex max-[1105px]:flex-col max-[1105px]:items-center w-full justify-center h-rest gap-x-6'>
                     <div className='mt-8'>
-                        <div className='h-80 w-[440px] rounded-lg p-4 px-6 border border-[#bdbdbd] bg-white'>
+                        <div className='h-80 w-[440px] max-sm:w-[300px] rounded-lg p-4 px-6 border border-[#bdbdbd] bg-white'>
                             <div className='flex flex-col items-center justify-center mb-6'>
                                 <img src={`http://localhost:8000/assets/${userInfo.image}`} alt="" className='h-[130px] w-[140px] rounded-full' />
                                 <h2 className='mb-5 text-[#414141]'>{userInfo?.username}</h2>
@@ -137,13 +142,13 @@ export default function UserProfile() {
                           {isUserFollowed(id) ? 'Unfollow' : 'Follow back'}
                         </p></div>
                         </div>
-                       { userInfo?.description &&  (<div className='overflow-auto wrapper h-[170px] w-[440px] bg-white border border-[#bdbdbd] rounded-lg px-4 py-2 mt-4'>
+                       { userInfo?.description &&  (<div className='overflow-auto wrapper h-[170px] w-[440px] max-sm:w-[300px] bg-white border border-[#bdbdbd] rounded-lg px-4 py-2 mt-4'>
                             <h2 className='mb-1 font-semibold'>Description</h2>
                             <p className='w-full overflow-y-auto break-words outline-none' placeholder='Your Description...'>{userInfo?.description}</p>
                         </div>)}
                        
                     </div>
-                    <section className='flex-col w-1/2 mt-8'>
+                    <section className='w-1/2 mt-8 max-[1105px]:w-4/5 max-md:w-full'>
                         <div className='h-[60px] rounded-lg p-2 flex items-center justify-evenly border border-[#bdbdbd] bg-white'>
                             <a href="" className={`${showLiked ? 'pt-[17px] pb-3 border-b-4 border-[#0047ff]' : ''}`} onClick={handleLikedClick}>Liked</a>
                             <a href="" className={` ${showEvents ? 'pt-[17px] pb-3 border-b-4 border-[#0047ff]' : ''}`} onClick={handleEventsClick}>Events</a>
